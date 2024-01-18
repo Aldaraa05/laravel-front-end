@@ -8,10 +8,14 @@ export const Student1 = (props) => {
   const [name, setName] = useState(props.name);
   const [register, setRegister] = useState(props.register);
   const [angi, setAngi] = useState(props.angi);
+  const token = props.token;
   const updateSuragch = async () => {
     if (angi < 13) {
       await axios
         .put(`http://127.0.0.1:8000/api/v1/updateSuragch/${props.id}`, {
+          headers: {
+            Authorization: token && `Bearer ${token}`,
+          },
           angi_id: angi,
           name: name,
           register: register,
@@ -28,7 +32,12 @@ export const Student1 = (props) => {
   };
   const deleteSuragch = async () => {
     await axios
-      .delete(`http://127.0.0.1:8000/api/v1/deleteSuragch/${props.id}`)
+
+      .delete(`http://127.0.0.1:8000/api/v1/deleteSuragch/${props.id}`, {
+        headers: {
+          Authorization: token && `Bearer ${token}`,
+        },
+      })
       .then((res) => {
         window.location.reload();
       });

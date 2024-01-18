@@ -14,6 +14,7 @@ export const SignIn = () => {
   const passwordRef = useRef();
   const registerRef = useRef();
   const [data, setData] = useState();
+  const [token, setToken] = useState();
   const nav = useNavigate();
   const swap = () => {
     setSign(!sign);
@@ -38,12 +39,13 @@ export const SignIn = () => {
       await axios
         .post(`http://127.0.0.1:8000/api/v1/signInBagsh`, {
           register: realRegister,
+          password: passwordRef.current.value,
         })
         .then((res) => {
-          setData(res.data);
-          if (data && data.password == passwordRef.current.value) {
-            nav(`bagshHome/${data.id}`, { state: { data: data.angi_id } });
-          }
+          setData(res && res.data);
+          nav(data && `bagshHome/${data[0]}`, {
+            state: { data: data },
+          });
         })
         .catch((err) => {
           console.log(err);

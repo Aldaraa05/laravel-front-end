@@ -9,12 +9,16 @@ export const TeacherProfile = (props) => {
   const [name, setName] = useState(data.name);
   const [register, setRegister] = useState(data.register);
   const [angi, setAngi] = useState(data.angi_id);
+  const token = props.token;
   const updateBagsh = async () => {
     if (angi > 12) {
       toast("анги 12-оос хэтэрсэн байх боломжгүй");
     } else {
       await axios
         .put(`http://127.0.0.1:8000/api/v1/updateBagsh/${data.id}`, {
+          headers: {
+            Authorization: token && `Bearer ${token}`,
+          },
           angi_id: angi,
           name: name,
           register: register,

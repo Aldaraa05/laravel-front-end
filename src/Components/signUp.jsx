@@ -10,6 +10,7 @@ export const SignUp = () => {
   const [sign, setSign] = useContext(SignContext);
   const [regigster1, setRegister1] = useState();
   const [regigster2, setRegister2] = useState();
+  const [token, setToken] = useState();
   const angiIdRef = useRef();
   const nameRef = useRef();
   const passwordRef = useRef();
@@ -53,7 +54,11 @@ export const SignUp = () => {
           })
           .then((res) => {
             console.log(res);
-            swap();
+            // setToken(res.token);
+            // swap();
+          })
+          .catch((err) => {
+            console.log(err);
           });
       } else {
         toast("passwords are not matched");

@@ -5,3 +5,21 @@
   width: 100vw;
   height: auto;
 }
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.button {
+  background-color: red;
+  padding: 10px;
+  border-radius: 20px;
+  width: 90px;
+  height: 35px;
+  color: white;
+  cursor: pointer;
+  margin-left: 100px;
+}
+.angi {
+  width: fi;
+}
