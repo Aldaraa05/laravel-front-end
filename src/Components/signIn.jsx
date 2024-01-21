@@ -6,7 +6,9 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
+import { Context } from "../App";
 export const SignIn = () => {
+  const [signed, setSigned] = useContext(Context);
   const [sign, setSign] = useContext(SignContext);
   let { suragch } = useParams();
   const [regigster1, setRegister1] = useState();
@@ -30,6 +32,7 @@ export const SignIn = () => {
         .then((res) => {
           setData(res.data);
           if (data && data.password == passwordRef.current.value) {
+            setSigned(true);
             nav(`/suragchHome/${data.id}`);
           } else {
             toast("password or register is incorrect");
@@ -43,9 +46,12 @@ export const SignIn = () => {
         })
         .then((res) => {
           setData(res && res.data);
+          console.log(res);
+          console.log(data);
           nav(data && `bagshHome/${data[0]}`, {
             state: { data: data },
           });
+          setSigned(true);
         })
         .catch((err) => {
           console.log(err);

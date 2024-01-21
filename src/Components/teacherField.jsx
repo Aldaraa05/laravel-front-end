@@ -1,10 +1,12 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import style from "../Styles/teacherField.module.css";
 import { Maping } from "./maplalt";
 import { TeacherProfile } from "./teacherProfile";
+import { Context } from "../App";
 export const TeacherField = () => {
+  const [signed, setSigned] = useContext(Context);
   const location = useLocation();
   const nav = useNavigate();
   const angi_id = location.state.data[0];
@@ -37,7 +39,7 @@ export const TeacherField = () => {
       .then((res) => {
         console.log(res);
         token = null;
-        nav("/");
+        setSigned(false);
       })
       .catch((err) => {
         console.log(err);

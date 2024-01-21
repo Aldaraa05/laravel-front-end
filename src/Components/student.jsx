@@ -14,7 +14,7 @@ export const Student = () => {
   const [angi, setAngi] = useState();
   const getData = async () => {
     const { data } = await axios.get(
-      `http://127.0.0.1:8000/api/v1/suragchNar/${id}`
+      `http://127.0.0.1:8000/api/v1/suragch/${id}`
     );
     setName(data.name);
     setAngi(data.angi_id);
